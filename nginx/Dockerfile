@@ -33,9 +33,12 @@ RUN touch /var/log/messages
 # Copy 'logrotate' config file
 COPY logrotate/nginx /etc/logrotate.d/
 
-# Set upstream conf and remove the default conf
-RUN echo "upstream php-upstream { server ${PHP_UPSTREAM_CONTAINER}:${PHP_UPSTREAM_PORT}; }" > /etc/nginx/conf.d/upstream.conf \
-    && rm /etc/nginx/conf.d/default.conf
+# Set upstream conf
+RUN echo "upstream project-php72-upstream { server project-php72:${PHP_UPSTREAM_PORT}; }" >> /etc/nginx/conf.d/upstream.conf
+RUN echo "upstream project-php80-upstream { server project-php80:${PHP_UPSTREAM_PORT}; }" >> /etc/nginx/conf.d/upstream.conf
+
+# remove the default conf
+RUN rm /etc/nginx/conf.d/default.conf
 
 ADD ./startup.sh /opt/startup.sh
 RUN sed -i 's/\r//g' /opt/startup.sh
