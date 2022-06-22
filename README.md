@@ -1,4 +1,4 @@
-##Laradock with different php version between projects
+## Laradock with different php version between projects
 
 This repository is a copy of the official https://github.com/laradock/laradock, with changes to run projects that use different versions of php simultaneously. It is part of 3 repositories used as an example.
 
